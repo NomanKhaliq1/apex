@@ -1,0 +1,336 @@
+<div class="scent-notes-section section-padding page-width">
+  {%- if section.settings.title != blank -%}
+    <div class="section-header">
+      <span class="section-header__caption">{{ section.settings.caption | escape }}</span>
+      <h2 class="section-header__title">{{ section.settings.title | escape }}</h2>
+    </div>
+  {%- endif -%}
+
+  <div class="scent-notes-grid">
+    <!-- Note 1: Floral -->
+    <div class="scent-note-card">
+      <div class="scent-note-card__bg">
+        {%- if section.settings.note_img_1 != blank -%}
+          {{ section.settings.note_img_1 | image_url: width: 600 | image_tag: class: 'scent-note-card__img' }}
+        {%- else -%}
+          <div class="scent-note-card__placeholder floral-bg"></div>
+        {%- endif -%}
+      </div>
+      <div class="scent-note-card__content">
+        <h3 class="scent-note-card__title">{{ section.settings.note_title_1 | escape }}</h3>
+        <p class="scent-note-card__desc">{{ section.settings.note_desc_1 | escape }}</p>
+        {%- if section.settings.note_link_1 != blank -%}
+          <a href="{{ section.settings.note_link_1 }}" class="scent-note-card__link">Explore Accords</a>
+        {%- endif -%}
+      </div>
+    </div>
+
+    <!-- Note 2: Woody -->
+    <div class="scent-note-card">
+      <div class="scent-note-card__bg">
+        {%- if section.settings.note_img_2 != blank -%}
+          {{ section.settings.note_img_2 | image_url: width: 600 | image_tag: class: 'scent-note-card__img' }}
+        {%- else -%}
+          <div class="scent-note-card__placeholder woody-bg"></div>
+        {%- endif -%}
+      </div>
+      <div class="scent-note-card__content">
+        <h3 class="scent-note-card__title">{{ section.settings.note_title_2 | escape }}</h3>
+        <p class="scent-note-card__desc">{{ section.settings.note_desc_2 | escape }}</p>
+        {%- if section.settings.note_link_2 != blank -%}
+          <a href="{{ section.settings.note_link_2 }}" class="scent-note-card__link">Explore Accords</a>
+        {%- endif -%}
+      </div>
+    </div>
+
+    <!-- Note 3: Citrus -->
+    <div class="scent-note-card">
+      <div class="scent-note-card__bg">
+        {%- if section.settings.note_img_3 != blank -%}
+          {{ section.settings.note_img_3 | image_url: width: 600 | image_tag: class: 'scent-note-card__img' }}
+        {%- else -%}
+          <div class="scent-note-card__placeholder citrus-bg"></div>
+        {%- endif -%}
+      </div>
+      <div class="scent-note-card__content">
+        <h3 class="scent-note-card__title">{{ section.settings.note_title_3 | escape }}</h3>
+        <p class="scent-note-card__desc">{{ section.settings.note_desc_3 | escape }}</p>
+        {%- if section.settings.note_link_3 != blank -%}
+          <a href="{{ section.settings.note_link_3 }}" class="scent-note-card__link">Explore Accords</a>
+        {%- endif -%}
+      </div>
+    </div>
+
+    <!-- Note 4: Spicy -->
+    <div class="scent-note-card">
+      <div class="scent-note-card__bg">
+        {%- if section.settings.note_img_4 != blank -%}
+          {{ section.settings.note_img_4 | image_url: width: 600 | image_tag: class: 'scent-note-card__img' }}
+        {%- else -%}
+          <div class="scent-note-card__placeholder spicy-bg"></div>
+        {%- endif -%}
+      </div>
+      <div class="scent-note-card__content">
+        <h3 class="scent-note-card__title">{{ section.settings.note_title_4 | escape }}</h3>
+        <p class="scent-note-card__desc">{{ section.settings.note_desc_4 | escape }}</p>
+        {%- if section.settings.note_link_4 != blank -%}
+          <a href="{{ section.settings.note_link_4 }}" class="scent-note-card__link">Explore Accords</a>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% stylesheet %}
+  .section-header__caption {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--color-accent);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .scent-notes-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-lg);
+    margin-top: var(--spacing-2xl);
+  }
+
+  @media (min-width: 550px) {
+    .scent-notes-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 990px) {
+    .scent-notes-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  .scent-note-card {
+    position: relative;
+    height: 380px;
+    background-color: #121212;
+    overflow: hidden;
+    display: flex;
+    align-items: flex-end;
+    border-radius: var(--radius-sm);
+    transition: var(--transition-slow);
+  }
+
+  .scent-note-card__bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+  }
+
+  .scent-note-card__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.6;
+    transition: var(--transition-slow);
+  }
+
+  .scent-note-card:hover .scent-note-card__img {
+    transform: scale(1.05);
+    opacity: 0.4;
+  }
+
+  .scent-note-card__placeholder {
+    width: 100%;
+    height: 100%;
+    opacity: 0.45;
+    transition: var(--transition-slow);
+  }
+
+  .scent-note-card:hover .scent-note-card__placeholder {
+    transform: scale(1.05);
+    opacity: 0.3;
+  }
+
+  /* Luxury Scent Note Background Gradients */
+  .floral-bg { background: linear-gradient(180deg, #fce7f3 0%, #be185d 100%); }
+  .woody-bg { background: linear-gradient(180deg, #fef3c7 0%, #78350f 100%); }
+  .citrus-bg { background: linear-gradient(180deg, #fef9c3 0%, #ca8a04 100%); }
+  .spicy-bg { background: linear-gradient(180deg, #fee2e2 0%, #b91c1c 100%); }
+
+  .scent-note-card__content {
+    position: relative;
+    z-index: 2;
+    padding: var(--spacing-lg);
+    width: 100%;
+    background: linear-gradient(0deg, rgba(18, 18, 18, 0.95) 0%, rgba(18, 18, 18, 0.6) 70%, transparent 100%);
+    color: #ffffff;
+  }
+
+  .scent-note-card__title {
+    color: #ffffff;
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin-bottom: var(--spacing-xs);
+  }
+
+  .scent-note-card__desc {
+    color: #cbd5e1;
+    font-size: 0.85rem;
+    line-height: 1.4;
+    margin-bottom: var(--spacing-md);
+  }
+
+  .scent-note-card__link {
+    display: inline-block;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-accent);
+    border-bottom: 1px solid var(--color-accent);
+    padding-bottom: 2px;
+  }
+
+  .scent-note-card__link:hover {
+    color: #ffffff;
+    border-color: #ffffff;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Scent Accords Grid",
+  "settings": [
+    {
+      "type": "text",
+      "id": "caption",
+      "label": "Caption",
+      "default": "Olfactory Families"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Explore Scent Profiles"
+    },
+    /* Scent Note 1 */
+    {
+      "type": "header",
+      "content": "Scent Note 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "note_img_1",
+      "label": "Background Image"
+    },
+    {
+      "type": "text",
+      "id": "note_title_1",
+      "label": "Title",
+      "default": "Floral Accords"
+    },
+    {
+      "type": "text",
+      "id": "note_desc_1",
+      "label": "Description",
+      "default": "Exquisite notes of Damask Rose, Jasmine, and French Lavender."
+    },
+    {
+      "type": "url",
+      "id": "note_link_1",
+      "label": "Link"
+    },
+    /* Scent Note 2 */
+    {
+      "type": "header",
+      "content": "Scent Note 2"
+    },
+    {
+      "type": "image_picker",
+      "id": "note_img_2",
+      "label": "Background Image"
+    },
+    {
+      "type": "text",
+      "id": "note_title_2",
+      "label": "Title",
+      "default": "Woody Accords"
+    },
+    {
+      "type": "text",
+      "id": "note_desc_2",
+      "label": "Description",
+      "default": "Deep base notes of Sandalwood, Cedarwood, and Vetiver."
+    },
+    {
+      "type": "url",
+      "id": "note_link_2",
+      "label": "Link"
+    },
+    /* Scent Note 3 */
+    {
+      "type": "header",
+      "content": "Scent Note 3"
+    },
+    {
+      "type": "image_picker",
+      "id": "note_img_3",
+      "label": "Background Image"
+    },
+    {
+      "type": "text",
+      "id": "note_title_3",
+      "label": "Title",
+      "default": "Citrus Accords"
+    },
+    {
+      "type": "text",
+      "id": "note_desc_3",
+      "label": "Description",
+      "default": "Zesty, vibrant top notes of Calabrian Bergamot and Mandarin."
+    },
+    {
+      "type": "url",
+      "id": "note_link_3",
+      "label": "Link"
+    },
+    /* Scent Note 4 */
+    {
+      "type": "header",
+      "content": "Scent Note 4"
+    },
+    {
+      "type": "image_picker",
+      "id": "note_img_4",
+      "label": "Background Image"
+    },
+    {
+      "type": "text",
+      "id": "note_title_4",
+      "label": "Title",
+      "default": "Spicy Accords"
+    },
+    {
+      "type": "text",
+      "id": "note_desc_4",
+      "label": "Description",
+      "default": "Warm, exotic middle notes of Pink Pepper, Saffron, and Cardamom."
+    },
+    {
+      "type": "url",
+      "id": "note_link_4",
+      "label": "Link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Scent Accords Grid"
+    }
+  ]
+}
+{% endschema %}

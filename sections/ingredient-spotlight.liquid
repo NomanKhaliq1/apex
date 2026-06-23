@@ -1,0 +1,293 @@
+<div class="ingredient-spotlight full-width">
+  <div class="ingredient-spotlight__wrapper page-width">
+    <!-- Grid Layout -->
+    <div class="spotlight-grid spotlight-grid--{{ section.settings.image_position }}">
+      <!-- Column 1: Image -->
+      <div class="spotlight-grid__image-col">
+        {%- if section.settings.image != blank -%}
+          {{ section.settings.image | image_url: width: 1000 | image_tag: class: 'spotlight-grid__img', loading: 'lazy' }}
+        {%- else -%}
+          <div class="spotlight-grid__image-placeholder">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="0.8" stroke="currentColor" class="spotlight-svg-placeholder">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v18M3 12h18M12 3a9 9 0 1 1-9 9M12 3a9 9 0 1 0 9 9" />
+            </svg>
+          </div>
+        {%- endif -%}
+      </div>
+
+      <!-- Column 2: Editorial Text -->
+      <div class="spotlight-grid__text-col">
+        <div class="spotlight-content">
+          {%- if section.settings.caption != blank -%}
+            <span class="spotlight-content__caption">{{ section.settings.caption | escape }}</span>
+          {%- endif -%}
+
+          {%- if section.settings.heading != blank -%}
+            <h2 class="spotlight-content__heading">{{ section.settings.heading | escape }}</h2>
+          {%- endif -%}
+
+          {%- if section.settings.text != blank -%}
+            <div class="spotlight-content__text">{{ section.settings.text }}</div>
+          {%- endif -%}
+
+          <!-- Note Accords Detail (Luxury visual) -->
+          <div class="spotlight-accords">
+            {%- if section.settings.accord_title_1 != blank -%}
+              <div class="spotlight-accord">
+                <span class="spotlight-accord__num">01</span>
+                <div class="spotlight-accord__info">
+                  <h4 class="spotlight-accord__name">{{ section.settings.accord_title_1 | escape }}</h4>
+                  <p class="spotlight-accord__desc">{{ section.settings.accord_desc_1 | escape }}</p>
+                </div>
+              </div>
+            {%- endif -%}
+
+            {%- if section.settings.accord_title_2 != blank -%}
+              <div class="spotlight-accord">
+                <span class="spotlight-accord__num">02</span>
+                <div class="spotlight-accord__info">
+                  <h4 class="spotlight-accord__name">{{ section.settings.accord_title_2 | escape }}</h4>
+                  <p class="spotlight-accord__desc">{{ section.settings.accord_desc_2 | escape }}</p>
+                </div>
+              </div>
+            {%- endif -%}
+          </div>
+
+          {%- if section.settings.button_label != blank and section.settings.button_link != blank -%}
+            <div class="spotlight-actions">
+              <a href="{{ section.settings.button_link }}" class="btn btn--primary spotlight-btn">
+                {{ section.settings.button_label | escape }}
+              </a>
+            </div>
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% stylesheet %}
+  .ingredient-spotlight {
+    background-color: #faf5eb; /* Cream background */
+    padding: var(--spacing-3xl) 0;
+  }
+
+  .ingredient-spotlight__wrapper {
+    margin: 0 auto;
+    max-width: var(--page-width);
+    padding: 0 var(--spacing-lg);
+  }
+
+  .spotlight-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-2xl);
+    align-items: center;
+  }
+
+  @media (min-width: 769px) {
+    .spotlight-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .spotlight-grid--right .spotlight-grid__image-col {
+      order: 2;
+    }
+    
+    .spotlight-grid--right .spotlight-grid__text-col {
+      order: 1;
+    }
+  }
+
+  .spotlight-grid__image-col {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    border-radius: var(--radius-sm);
+    border: 1px solid rgba(197, 168, 128, 0.2);
+  }
+
+  .spotlight-grid__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .spotlight-grid__image-placeholder {
+    width: 100%;
+    height: 100%;
+    background-color: #f3ede2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .spotlight-svg-placeholder {
+    width: 60px;
+    height: auto;
+    color: var(--color-accent);
+  }
+
+  .spotlight-content {
+    display: flex;
+    flex-direction: column;
+    padding: var(--spacing-md) 0;
+  }
+
+  .spotlight-content__caption {
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--color-accent);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .spotlight-content__heading {
+    font-size: clamp(2rem, 5vw, 2.75rem);
+    line-height: 1.15;
+    margin-bottom: var(--spacing-md);
+  }
+
+  .spotlight-content__text {
+    font-size: 1.05rem;
+    line-height: 1.6;
+    margin-bottom: var(--spacing-xl);
+  }
+
+  .spotlight-accords {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-xl);
+    border-top: 1px solid rgba(197, 168, 128, 0.2);
+    padding-top: var(--spacing-lg);
+  }
+
+  .spotlight-accord {
+    display: flex;
+    gap: var(--spacing-md);
+  }
+
+  .spotlight-accord__num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--color-accent);
+    line-height: 1;
+  }
+
+  .spotlight-accord__info {
+    flex: 1;
+  }
+
+  .spotlight-accord__name {
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 2px;
+    color: var(--color-foreground);
+  }
+
+  .spotlight-accord__desc {
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    margin: 0;
+  }
+
+  .spotlight-btn {
+    align-self: flex-start;
+    padding: 0.8rem 2.25rem;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Ingredient Spotlight",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Ingredient Image"
+    },
+    {
+      "type": "select",
+      "id": "image_position",
+      "label": "Image Position (Desktop)",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "text",
+      "id": "caption",
+      "label": "Caption",
+      "default": "Sourcing Excellence"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Harvested in Grasse: Centifolia Rose"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Description",
+      "default": "<p>Our signature fragrances revolve around organic, ethically-sourced Centifolia Rose petals, handpicked at dawn in the fields of Grasse, France. This careful process preserves the pure, honeyed floral oils that form the heart of Alive Scents.</p>"
+    },
+    /* Accord 1 */
+    {
+      "type": "text",
+      "id": "accord_title_1",
+      "label": "Accord 1 Title",
+      "default": "Heart Accord"
+    },
+    {
+      "type": "text",
+      "id": "accord_desc_1",
+      "label": "Accord 1 Description",
+      "default": "Delivers a rich, velvet floral aroma that defines the longevity of the sillage."
+    },
+    /* Accord 2 */
+    {
+      "type": "text",
+      "id": "accord_title_2",
+      "label": "Accord 2 Title",
+      "default": "Top Accords pairing"
+    },
+    {
+      "type": "text",
+      "id": "accord_desc_2",
+      "label": "Accord 2 Description",
+      "default": "Blended with Calabrian Bergamot to introduce a fresh, sparkling citrus opening."
+    },
+    /* Button */
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button Label",
+      "default": "Learn Our Process"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Ingredient Spotlight"
+    }
+  ]
+}
+{% endschema %}

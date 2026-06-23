@@ -3,22 +3,38 @@
     "hero": {
       "type": "apex-hero",
       "settings": {
-        "caption": "Apex Premium Collection",
-        "heading": "The Next Generation",
-        "subheading": "<p>Experience modern storefront layout design, high performance, and rapid conversions.</p>"
+        "caption": "Alive Scents Haute Parfumerie",
+        "heading": "Artisanal Fragrances of Pure Luxury",
+        "subheading": "<p>Sensory, botanical-driven blends hand-crafted with rare extracts to linger on the skin.</p>"
       }
+    },
+    "scent_notes": {
+      "type": "scent-notes-grid",
+      "settings": {}
     },
     "featured_products": {
       "type": "featured-collection-grid",
       "settings": {
-        "title": "Shop Best Sellers",
+        "title": "The Signature Collection",
+        "description": "<p>Our most coveted botanical extracts and seasonal collections.</p>",
         "products_to_show": 4,
         "columns_desktop": 4
       }
+    },
+    "ingredient_spotlight": {
+      "type": "ingredient-spotlight",
+      "settings": {}
+    },
+    "scent_reviews": {
+      "type": "scent-reviews",
+      "settings": {}
     }
   },
   "order": [
     "hero",
-    "featured_products"
+    "scent_notes",
+    "featured_products",
+    "ingredient_spotlight",
+    "scent_reviews"
   ]
 }

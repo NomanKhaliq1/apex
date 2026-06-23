@@ -1,0 +1,132 @@
+<div class="scent-reviews-section section-padding page-width">
+  {%- if section.settings.title != blank -%}
+    <div class="section-header">
+      <span class="section-header__caption">{{ section.settings.caption | escape }}</span>
+      <h2 class="section-header__title">{{ section.settings.title | escape }}</h2>
+    </div>
+  {%- endif -%}
+
+  <div class="scent-reviews-grid">
+    <!-- Review 1 -->
+    <div class="scent-review-card">
+      <div class="scent-review-card__stars">★★★★★</div>
+      <p class="scent-review-card__text">"Absolute masterpiece. The woody sandalwood dry-down is exceptionally smooth, and I get compliments even after 10 hours of wear. Highly recommended."</p>
+      
+      <div class="scent-review-card__author">
+        <h4 class="scent-review-card__author-name">Sophia V.</h4>
+        <span class="scent-review-card__author-detail">Verified Buyer — Oud & Rose Accord</span>
+      </div>
+    </div>
+
+    <!-- Review 2 -->
+    <div class="scent-review-card">
+      <div class="scent-review-card__stars">★★★★★</div>
+      <p class="scent-review-card__text">"Vibrant, zesty bergamot that slowly blends into a warm amber skin scent. It's refreshing, luxury in a bottle, and the bottle design itself is gorgeous."</p>
+      
+      <div class="scent-review-card__author">
+        <h4 class="scent-review-card__author-name">Marcus K.</h4>
+        <span class="scent-review-card__author-detail">Verified Buyer — Bergamot & Musk Accord</span>
+      </div>
+    </div>
+
+    <!-- Review 3 -->
+    <div class="scent-review-card">
+      <div class="scent-review-card__stars">★★★★★</div>
+      <p class="scent-review-card__text">"A delicate balance of fresh white jasmine and deep cedarwood. It has incredible longevity on clothes. Alive Scents has become my signature house."</p>
+      
+      <div class="scent-review-card__author">
+        <h4 class="scent-review-card__author-name">Elena R.</h4>
+        <span class="scent-review-card__author-detail">Verified Buyer — Jasmine & Cedarwood Accord</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% stylesheet %}
+  .scent-reviews-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-xl);
+    margin-top: var(--spacing-2xl);
+  }
+
+  @media (min-width: 769px) {
+    .scent-reviews-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .scent-review-card {
+    background-color: var(--color-background);
+    border: 1px solid var(--color-border);
+    padding: var(--spacing-xl);
+    border-radius: var(--radius-sm);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 250px;
+    transition: var(--transition-normal);
+  }
+
+  .scent-review-card:hover {
+    border-color: var(--color-accent);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .scent-review-card__stars {
+    color: var(--color-accent);
+    font-size: 1.1rem;
+    letter-spacing: 2px;
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .scent-review-card__text {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.25rem;
+    line-height: 1.5;
+    color: var(--color-foreground);
+    margin-bottom: var(--spacing-lg);
+    flex-grow: 1;
+  }
+
+  .scent-review-card__author-name {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 700;
+    margin-bottom: 2px;
+    color: var(--color-foreground);
+  }
+
+  .scent-review-card__author-detail {
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Fragrance Reviews",
+  "settings": [
+    {
+      "type": "text",
+      "id": "caption",
+      "label": "Caption",
+      "default": "Customer Musings"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Longevity & Sillage Notes"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Fragrance Reviews"
+    }
+  ]
+}
+{% endschema %}

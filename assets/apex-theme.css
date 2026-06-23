@@ -4,10 +4,10 @@
  */
 
 :root {
-  /* Apex Premium Color Palette */
-  --color-accent: #4f46e5;
-  --color-accent-hover: #4338ca;
-  --color-accent-light: #e0e7ff;
+  /* Alive Scents Luxury Fragrance Color Palette */
+  --color-accent: #c5a880; /* Champagne Gold */
+  --color-accent-hover: #b3936a;
+  --color-accent-light: #faf5eb;
   --color-success: #10b981;
   --color-warning: #f59e0b;
   --color-danger: #ef4444;
@@ -24,11 +24,11 @@
   --spacing-2xl: 3rem;
   --spacing-3xl: 4rem;
 
-  /* Border Radii */
-  --radius-xs: 4px;
-  --radius-sm: 8px;
-  --radius-md: 12px;
-  --radius-lg: 16px;
+  /* Border Radii - Sharp & Elegant for Cosmetic Packaging */
+  --radius-xs: 0px;
+  --radius-sm: 2px;
+  --radius-md: 4px;
+  --radius-lg: 6px;
   --radius-full: 9999px;
 
   /* Shadows */
@@ -55,20 +55,27 @@ a:hover {
 }
 
 /* Base Fonts & Typography */
-h1, h2, h3, h4, h5, h6 {
-  font-weight: 700;
-  line-height: 1.25;
-  color: var(--color-foreground);
-  margin-bottom: 0.5em;
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
-h1 { font-size: clamp(2rem, 5vw, 3rem); }
-h2 { font-size: clamp(1.5rem, 4vw, 2.25rem); }
-h3 { font-size: clamp(1.25rem, 3vw, 1.75rem); }
-h4 { font-size: 1.25rem; }
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Cormorant Garamond', Georgia, Cambria, "Times New Roman", Times, serif;
+  font-weight: 500;
+  line-height: 1.2;
+  color: var(--color-foreground);
+  margin-bottom: 0.5em;
+  letter-spacing: 0.01em;
+}
+
+h1 { font-size: clamp(2.25rem, 6vw, 3.5rem); }
+h2 { font-size: clamp(1.75rem, 5vw, 2.5rem); font-weight: 400; }
+h3 { font-size: clamp(1.35rem, 3.5vw, 1.85rem); font-weight: 500; }
+h4 { font-size: 1.25rem; font-weight: 600; font-family: 'Inter', sans-serif; text-transform: uppercase; letter-spacing: 0.05em; }
 
 p {
-  line-height: 1.6;
+  font-family: 'Inter', sans-serif;
+  line-height: 1.7;
   color: var(--color-text-muted);
   margin-bottom: 1.25rem;
 }
@@ -215,4 +222,34 @@ p {
   -webkit-backdrop-filter: blur(16px);
   border: 1px solid rgba(255, 255, 255, 0.4);
   box-shadow: var(--shadow-glass);
+}
+
+/* Global Section Header & Spacing Utilities */
+.section-padding {
+  padding-top: var(--spacing-3xl);
+  padding-bottom: var(--spacing-3xl);
+}
+
+.section-header {
+  margin-bottom: var(--spacing-2xl);
+  text-align: center;
+}
+
+.section-header__caption {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--color-accent);
+  margin-bottom: var(--spacing-sm);
+}
+
+.section-header__title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2rem, 5vw, 2.75rem);
+  font-weight: 500;
+  margin-top: 0;
+  margin-bottom: var(--spacing-xs);
+  color: var(--color-foreground);
 }
