@@ -1,0 +1,253 @@
+<div class="header-wrapper">
+  <header class="header page-width">
+    <!-- Logo Column -->
+    <div class="header__logo">
+      {%- if section.settings.logo != blank -%}
+        {%- assign logo_alt = section.settings.logo.alt | default: shop.name | escape -%}
+        {%- assign logo_height = section.settings.logo_width | divided_by: section.settings.logo.aspect_ratio -%}
+        <a href="{{ routes.root_url }}" class="header__logo-link">
+          {{ section.settings.logo | image_url: width: 400 | image_tag:
+            class: 'header__logo-img',
+            widths: '50, 100, 150, 200, 250, 300, 400',
+            height: logo_height,
+            width: section.settings.logo_width,
+            alt: logo_alt
+          }}
+        </a>
+      {%- else -%}
+        <a href="{{ routes.root_url }}" class="header__logo-text">
+          {{ shop.name }}
+        </a>
+      {%- endif -%}
+    </div>
+
+    <!-- Navigation Column -->
+    <nav class="header__navigation" role="navigation">
+      <ul class="header__menu-list">
+        {%- for link in section.settings.menu.links -%}
+          <li class="header__menu-item">
+            <a href="{{ link.url }}" class="header__menu-link{% if link.active %} header__menu-link--active{% endif %}">
+              {{ link.title }}
+            </a>
+          </li>
+        {%- endfor -%}
+      </ul>
+    </nav>
+
+    <!-- Actions Column (Search, Account, Cart) -->
+    <div class="header__actions">
+      <!-- Search Form Trigger -->
+      <a href="{{ routes.search_url }}" class="header__action-icon" aria-label="Search">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.602 10.602Z" />
+        </svg>
+      </a>
+
+      <!-- Account Link -->
+      {%- if shop.customer_accounts_enabled -%}
+        <a href="{{ routes.account_url }}" class="header__action-icon" aria-label="Account">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
+          </svg>
+        </a>
+      {%- endif -%}
+
+      <!-- Cart Link -->
+      <a href="{{ routes.cart_url }}" class="header__action-icon header__cart-trigger" aria-label="Cart">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm7.5 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
+        </svg>
+        {%- if cart.item_count > 0 -%}
+          <span class="header__cart-count">{{ cart.item_count }}</span>
+        {%- endif -%}
+      </a>
+    </div>
+  </header>
+</div>
+
+{% stylesheet %}
+  .header-wrapper {
+    background-color: var(--color-background);
+    border-bottom: 1px solid var(--color-border);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    transition: var(--transition-normal);
+  }
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 70px;
+    padding: 0 var(--spacing-lg);
+    max-width: var(--page-width);
+    margin: 0 auto;
+  }
+
+  /* Logo */
+  .header__logo {
+    display: flex;
+    align-items: center;
+  }
+
+  .header__logo-link {
+    display: inline-block;
+  }
+
+  .header__logo-img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+  }
+
+  .header__logo-text {
+    font-size: 1.5rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: var(--color-foreground);
+    text-transform: uppercase;
+  }
+
+  .header__logo-text:hover {
+    color: var(--color-accent);
+  }
+
+  /* Navigation */
+  .header__navigation {
+    display: none;
+  }
+
+  @media (min-width: 769px) {
+    .header__navigation {
+      display: block;
+    }
+  }
+
+  .header__menu-list {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: var(--spacing-xl);
+  }
+
+  .header__menu-link {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--color-foreground);
+    padding: 6px 0;
+    position: relative;
+  }
+
+  .header__menu-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: var(--color-accent);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .header__menu-link:hover {
+    color: var(--color-accent);
+  }
+
+  .header__menu-link:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+
+  .header__menu-link--active {
+    color: var(--color-accent);
+    font-weight: 600;
+  }
+
+  .header__menu-link--active::after {
+    transform: scaleX(1);
+  }
+
+  /* Actions */
+  .header__actions {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+  }
+
+  .header__action-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-foreground);
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius-full);
+    position: relative;
+    transition: var(--transition-fast);
+  }
+
+  .header__action-icon:hover {
+    background-color: rgba(0, 0, 0, 0.04);
+    color: var(--color-accent);
+  }
+
+  .header__action-icon svg {
+    width: 22px;
+    height: 22px;
+  }
+
+  .header__cart-trigger {
+    position: relative;
+  }
+
+  .header__cart-count {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    background-color: var(--color-accent);
+    color: white;
+    font-size: 0.7rem;
+    font-weight: 700;
+    min-width: 16px;
+    height: 16px;
+    border-radius: var(--radius-full);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 4px;
+    border: 1.5px solid var(--color-background);
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo image"
+    },
+    {
+      "type": "range",
+      "id": "logo_width",
+      "min": 50,
+      "max": 250,
+      "step": 10,
+      "default": 90,
+      "unit": "px",
+      "label": "Custom logo width"
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Menu",
+      "default": "main-menu"
+    }
+  ]
+}
+{% endschema %}

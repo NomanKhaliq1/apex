@@ -1,0 +1,265 @@
+<footer class="footer-wrapper">
+  <div class="footer page-width">
+    <!-- Grid Layout -->
+    <div class="footer__grid">
+      <!-- Col 1: Brand Info -->
+      <div class="footer__col footer__col--brand">
+        <h3 class="footer__title">{{ shop.name }}</h3>
+        {%- if section.settings.description != blank -%}
+          <div class="footer__description">{{ section.settings.description }}</div>
+        {%- endif -%}
+        
+        {%- if section.settings.show_socials -%}
+          <div class="footer__socials">
+            <!-- Simple clean text/icon links for social media -->
+            {%- if settings.social_instagram_link != blank -%}<a href="{{ settings.social_instagram_link }}" class="footer__social-link" aria-label="Instagram">Instagram</a>{%- endif -%}
+            {%- if settings.social_twitter_link != blank -%}<a href="{{ settings.social_twitter_link }}" class="footer__social-link" aria-label="Twitter">Twitter</a>{%- endif -%}
+            {%- if settings.social_facebook_link != blank -%}<a href="{{ settings.social_facebook_link }}" class="footer__social-link" aria-label="Facebook">Facebook</a>{%- endif -%}
+          </div>
+        {%- endif -%}
+      </div>
+
+      <!-- Col 2: Navigation Menu -->
+      <div class="footer__col footer__col--links">
+        <h4 class="footer__col-title">Quick Links</h4>
+        <ul class="footer__menu">
+          {%- for link in section.settings.menu.links -%}
+            <li class="footer__menu-item">
+              <a href="{{ link.url }}" class="footer__menu-link">{{ link.title }}</a>
+            </li>
+          {%- endfor -%}
+        </ul>
+      </div>
+
+      <!-- Col 3: Newsletter Signup -->
+      <div class="footer__col footer__col--newsletter">
+        <h4 class="footer__col-title">Newsletter</h4>
+        <p class="footer__newsletter-desc">Subscribe to receive updates, access to exclusive deals, and more.</p>
+        {%- form 'customer', class: 'footer__newsletter-form' -%}
+          <input type="hidden" name="contact[tags]" value="newsletter">
+          <div class="footer__newsletter-input-group">
+            <input
+              id="NewsletterForm--{{ section.id }}"
+              type="email"
+              name="contact[email]"
+              class="form-input footer__newsletter-input"
+              value="{{ form.email }}"
+              aria-required="true"
+              autocorrect="off"
+              autocapitalize="off"
+              autocomplete="email"
+              placeholder="Enter your email"
+              required
+            >
+            <button type="submit" class="btn btn--primary footer__newsletter-btn" name="commit" id="Subscribe">
+              Subscribe
+            </button>
+          </div>
+        {%- endform -%}
+      </div>
+    </div>
+
+    <!-- Bottom Bar (Copyright & Payments) -->
+    <div class="footer__bottom">
+      <div class="footer__copyright">
+        <span>&copy; {{ 'now' | date: '%Y' }} {{ shop.name | link_to: routes.root_url }}. All rights reserved.</span>
+        <span class="footer__powered">{{ powered_by_link }}</span>
+      </div>
+
+      <div class="footer__payment">
+        {%- if section.settings.show_payment_icons -%}
+          {%- for type in shop.enabled_payment_types -%}
+            {{ type | payment_type_svg_tag: class: 'footer__payment-icon' }}
+          {%- endfor -%}
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</footer>
+
+{% stylesheet %}
+  .footer-wrapper {
+    background-color: #0f172a; /* Dark premium background for the footer */
+    color: #f8fafc;
+    border-top: 1px solid #1e293b;
+    padding-top: var(--spacing-3xl);
+    padding-bottom: var(--spacing-xl);
+    margin-top: var(--spacing-3xl);
+  }
+
+  .footer {
+    max-width: var(--page-width);
+    margin: 0 auto;
+    padding: 0 var(--spacing-lg);
+  }
+
+  .footer__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-2xl);
+    padding-bottom: var(--spacing-2xl);
+    border-bottom: 1px solid #1e293b;
+  }
+
+  @media (min-width: 769px) {
+    .footer__grid {
+      grid-template-columns: 2fr 1fr 1.5fr;
+    }
+  }
+
+  .footer__title {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #ffffff;
+    margin-bottom: var(--spacing-md);
+  }
+
+  .footer__description {
+    color: #94a3b8;
+    line-height: 1.6;
+    margin-bottom: var(--spacing-md);
+    max-width: 45ch;
+  }
+
+  .footer__col-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: var(--spacing-md);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .footer__menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .footer__menu-item {
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .footer__menu-link {
+    color: #94a3b8;
+    font-weight: 500;
+    transition: var(--transition-fast);
+  }
+
+  .footer__menu-link:hover {
+    color: var(--color-accent-light);
+    padding-left: 4px;
+  }
+
+  .footer__newsletter-desc {
+    color: #94a3b8;
+    font-size: 0.95rem;
+    margin-bottom: var(--spacing-md);
+  }
+
+  .footer__newsletter-input-group {
+    display: flex;
+    gap: var(--spacing-xs);
+  }
+
+  .footer__newsletter-input {
+    background-color: #1e293b;
+    border-color: #334155;
+    color: #ffffff;
+  }
+
+  .footer__newsletter-input::placeholder {
+    color: #64748b;
+  }
+
+  .footer__newsletter-btn {
+    padding: 0.6rem 1.25rem;
+    font-size: 0.9rem;
+  }
+
+  .footer__socials {
+    display: flex;
+    gap: var(--spacing-md);
+  }
+
+  .footer__social-link {
+    font-size: 0.85rem;
+    color: #94a3b8;
+    border-bottom: 1px solid transparent;
+  }
+
+  .footer__social-link:hover {
+    color: #ffffff;
+    border-bottom-color: #ffffff;
+  }
+
+  /* Bottom Bar */
+  .footer__bottom {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--spacing-md);
+    padding-top: var(--spacing-lg);
+    font-size: 0.85rem;
+    color: #64748b;
+  }
+
+  @media (min-width: 769px) {
+    .footer__bottom {
+      flex-direction: row;
+    }
+  }
+
+  .footer__copyright a {
+    color: #94a3b8;
+  }
+
+  .footer__powered a {
+    color: #64748b;
+    font-size: 0.8rem;
+  }
+
+  .footer__payment {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-xs);
+  }
+
+  .footer__payment-icon {
+    width: 38px;
+    height: auto;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Footer",
+  "settings": [
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description",
+      "default": "<p>Apex storefront templates are built for high conversions, beautiful design layouts, and premium user experiences.</p>"
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Menu",
+      "default": "footer"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_socials",
+      "label": "Show social links",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_payment_icons",
+      "label": "Show payment icons",
+      "default": true
+    }
+  ]
+}
+{% endschema %}
